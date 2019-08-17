@@ -1,0 +1,41 @@
+logging:
+  file: logs/test.log
+  
+app:
+  schedule:
+    enable: false
+    dispatch-cron: 0 0/1 * * * ?
+
+  component:
+    content-gather:
+      email: net.jpcode.solid.spi.impl.EmailGather
+      filesystem: net.jpcode.solid.spi.impl.FileSystemGather
+
+    content-filter:
+      sender: net.jpcode.solid.spi.impl.SenderFilter
+      fileext: net.jpcode.solid.spi.impl.FileExtFilter
+            
+    text-extractor:
+      html: net.jpcode.solid.spi.impl.HtmlExtractor
+      pdf: net.jpcode.solid.spi.impl.PdfExtractor
+      doc: net.jpcode.solid.spi.impl.WordExtractor
+      docx: net.jpcode.solid.spi.impl.WordExtractor
+      
+    resume-parser:
+      default: net.jpcode.solid.spi.impl.ResumeSDKParser
+      resumesdk: net.jpcode.solid.spi.impl.ResumeSDKParser
+      
+    storage:
+      default: net.jpcode.solid.spi.impl.LocalStorage
+      
+  config:
+    resumesdkparser:
+      url: http://www.resumesdk.com/api/parse
+      uid: 1
+      pwd: 1
+      auth: 1
+  
+    localstorage:
+      root: /users/billyzh/solid/doc
+
+  

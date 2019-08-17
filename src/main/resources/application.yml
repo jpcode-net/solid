@@ -1,0 +1,36 @@
+app:
+  schedule: 
+    enable: true
+    dispatch-cron: 0 0/1 * * * ?
+
+  component:
+    content-gather:
+      email: net.jpcode.resume.spi.impl.EmailGather
+      filesystem: net.jpcode.resume.spi.impl.FileSystemGather
+      
+    content-filter:
+      sender: net.jpcode.resume.spi.impl.SenderFilter
+      fileext: net.jpcode.resume.spi.impl.FileExtFilter
+      
+    text-extractor:
+      html: net.jpcode.resume.spi.impl.HtmlExtractor
+      pdf: net.jpcode.resume.spi.impl.PdfExtractor
+      doc: net.jpcode.resume.spi.impl.WordExtractor
+      docx: net.jpcode.resume.spi.impl.WordExtractor
+      
+    resume-parser:
+      default: net.jpcode.resume.spi.impl.ResumeSDKParser
+      resumesdk: net.jpcode.resume.spi.impl.ResumeSDKParser
+      
+    storage:
+      default: net.jpcode.resume.spi.impl.LocalStorage
+      
+  config:
+    resumesdkparser:
+      url: http://www.resumesdk.com/api/parse
+      uid: 000
+      pwd: 000
+      auth: admin:2015
+  
+    localstorage:
+      root: /users/billyzh/resume/doc
